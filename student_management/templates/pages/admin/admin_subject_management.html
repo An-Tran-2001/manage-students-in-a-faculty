@@ -1,0 +1,64 @@
+{% extends "pages/base.html" %}
+
+
+{% block title %}
+subject system
+{% endblock %}
+
+{% block content %}
+<h1>ADD A SUBJECT</h1>
+<form action="{{ url_for('admin_subject_add') }}" method="get">
+    <table>
+        <tr>
+            <th>Subject Code:</th>
+            <th><input type="text" name="subject_code"></th>
+        </tr>
+
+        <tr>
+            <th>Subject Name:</th>
+            <th><input type="text" name="subject_name"></th>
+        </tr>
+        <tr>
+            <th>Subject Credit:</th>
+            <th><input type="text" name="number_of_credit"></th>
+        </tr>
+        <tr>
+            <th>Teacher name:</th>
+            <th><input type="text" name="teacher_name"></th>
+        <tr>
+            <td colspan="2"><input type="submit" value="add"></td>
+        </tr>
+    </table>
+</form>
+<h1>ADD A LIST SUBJECT WIDTH .CSV</h1>
+<form action="{{ url_for('admin_subject_add_csv') }}" method="post" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <input type="submit" value="add">
+</form>
+<h2>course search with subject code and subject name</h2>
+<div class="search">
+    <form action="{{ url_for('admin_subject_search') }}" method="get">
+        <input type="text" name="subject" id="search_subject">
+        <input type="submit" value="search">
+    </form>
+</div>
+<h1>LIST SUBJECT</h1>
+<table>
+    <tr>
+        <th>Subject Code:</th>
+        <th>Subject Name:</th>
+        <th>Number of credits:</th>
+        <th>Teacher name:</th>
+    </tr>
+    {% for subject in subjects %}
+    <tr>
+        <td>{{subject.subject_code}}</td>
+        <td>{{subject.subject_name}}</td>
+        <td>{{subject.number_of_credits}}</td>
+        <td>{{subject.teacher_name}}</td>
+        <td><a href="{{url_for('admin_subject_management_edit',subject_id=subject.id)}}">edit</a></td>
+        <td><a href="{{url_for('admin_subject_management_delete',subject_id=subject.id)}}">delete</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

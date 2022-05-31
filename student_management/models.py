@@ -16,9 +16,9 @@ class User(db.Model):
     password = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), nullable=False)
     phone_number = db.Column(db.String(255), nullable=False)
-    grant_permission = db.Column(db.Boolean, nullable=False)
+    grant_permission = db.Column(db.Boolean, nullable=False)# kiểu dữ liệu boolean cho phép lưu trữ True hoặc False 
     created_at = db.Column(db.DateTime, nullable=False)
-    updated_at = db.Column(db.DateTime, nullable=True)
+    updated_at = db.Column(db.DateTime, nullable=True)#nullable=True cho phép lưu trữ giá trị null(ko có giá trị khi đẩy lên)
 
 
 class Subject(db.Model):

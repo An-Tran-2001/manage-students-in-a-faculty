@@ -1,4 +1,4 @@
-from flask import flash, redirect, url_for, render_template, request
+from flask import flash, redirect, url_for, render_template, request,session
 from student_management.models import *
 import os
 import csv
@@ -9,20 +9,22 @@ from student_management import app, ALLOWED_EXTENSIONS
 
 @app.route("/admin_account_management")
 def admin_account_management():
-    username = request.args.get('username')
-    password = request.args.get('password')
-    email = request.args.get('email')
-    phone = request.args.get('phone_number')
-    grant_permission = bool(request.args.get('grant_permission'))
-    if username and email and phone and password:
-        created_at = datetime.datetime.now()
-        user = User(username=username, password=password, email=email,
-                    phone_number=phone, grant_permission=grant_permission, created_at=created_at)
-        db.session.add(user)
-        db.session.commit()
-        return render_template("pages/admin/account_management.html", success="Add account successfully")
-    return render_template("pages/admin/account_management.html")
-
+    if 'user' in session:
+        username = request.args.get('username')
+        password = request.args.get('password')
+        email = request.args.get('email')
+        phone = request.args.get('phone_number')
+        grant_permission = bool(request.args.get('grant_permission'))# kiểu bool trẻ vè True Flas khi ko có dữ liệu False có duẽ liệu là True
+        if username and email and phone and password:
+            created_at = datetime.datetime.now()
+            user = User(username=username, password=password, email=email,
+                        phone_number=phone, grant_permission=grant_permission, created_at=created_at)
+            db.session.add(user)
+            db.session.commit()
+            return render_template("pages/admin/account_management.html", success="Add account successfully")
+        return render_template("pages/admin/account_management.html")
+    else:
+        return redirect(url_for('login'))
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -44,7 +46,7 @@ def admin_account_management_upload_file():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))#appconfig là địa chỉ của file đã khai báo ở trên file __init__
             return redirect(url_for('load_file',
                                     filename=filename))
 
@@ -52,7 +54,7 @@ def admin_account_management_upload_file():
 @app.route("/load_file")
 def load_file():
     filename = request.args.get('filename')
-    file = open(os.path.join(app.config['UPLOAD_FOLDER'], filename), 'r')
+    file = open(os.path.join(app.config['UPLOAD_FOLDER'], filename), 'r')# r ở đây là read đọc file, appconfig là địa chỉ của file đã khai báo ở trên file __init__
     data = csv.reader(file)
     for username, password, email, phone_number, grant_permission in data:
         created_at = datetime.datetime.now()
@@ -71,7 +73,7 @@ def load_file():
 def admin_account_management_search_account():
     search = request.args.get('search')
     if search:
-        users = User.query.filter(User.username.like("%" + search + "%")).all()
+        users = User.query.filter(User.username.like("%" + search + "%")).all()# tìm kiếm tất cả giá trị với điều kiện like là '%Biến%' sẽ trả về tất cả giá trị username có chứa Biến đó
         return render_template("pages/admin/account_management.html", users=users)
 
 

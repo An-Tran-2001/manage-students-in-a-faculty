@@ -1,4 +1,4 @@
-from flask import flash, redirect, url_for, render_template, request
+from flask import flash, redirect, url_for, render_template, request,session
 from student_management.models import *
 from student_management import app
 
@@ -14,12 +14,14 @@ def login():
             if user.grant_permission:  # kiểm tra cấp quyền của tài khoản True là được cấp quyền chỉnh sửa của giáo viên False là không được cấp quyền chỉnh sửa
                 if user.password == password:  # kiểm tra mật khẩu của tài khoản có trùng với mật khẩu được nhập vào không
                     # chạy đến file và giả lại user
-                    return render_template("pages/admin/home_admin.html", user=user)
+                    session['user'] = user.id
+                    return render_template("pages/admin/home_admin.html", user=user)# chạy thẳng đén file home_admin
                 else:
                     return render_template('pages/login.html', error="Password is incorrect")
             else:  # ngược lại, tài khoản thường không có quyền chỉnh sửa là tài khoản sinh viên vẫn đc kiểm tra mật khẩu như trên nhưng sẽ đưa về hàm xử lý khác nhau
                 if user.password == password:
                     # chạy đến hàm được gọi là home_user
+                    session['user'] = user.id
                     return redirect(url_for('home_user'))
                 else:
                     # không trùng mật khẩu sẽ trả lại biến lõi sai viws value là sai mật khẩu rùi
