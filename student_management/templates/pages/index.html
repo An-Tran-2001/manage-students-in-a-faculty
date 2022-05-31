@@ -1,0 +1,33 @@
+{% extends "pages/base.html" %}
+
+{% block title %}
+Student Management
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h1>Welcome to Student Management System</h1>
+                <p>This is a simple student management system built with python and pgadmin.</p>
+                <p>
+                    <a class="btn btn-primary btn-lg" href="{{ url_for('login') }}" role="button">Login</a>
+                </p>
+            </div>
+        </div>
+        <div class="seach-form">
+            <form action="{{ url_for('search') }}" method="get">
+                <div class="form-group">
+                    <label for="search">Search</label>
+                    <input type="text" class="form-control" id="search" name="search" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+    </div>
+    <dv class="information">
+
+    </dv>
+</div>
+{% endblock %}

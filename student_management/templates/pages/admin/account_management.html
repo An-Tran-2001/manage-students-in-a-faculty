@@ -1,0 +1,94 @@
+{% extends "pages/base.html" %}
+
+{% block title %}
+account Management System
+{% endblock %}
+
+{% block content %}
+<p>{{success}}</p>
+<h1>add a account</h1>
+<form action="{{url_for('admin_account_management')}}" method="get">
+    <table>
+        <tr>
+            <th>username</th>
+            <th><input type="text" name="username"></th>
+        </tr>
+        <tr>
+            <th>email</th>
+            <th><input type="text" name="email"></th>
+        </tr>
+        <tr>
+            <th>phone_number</th>
+            <th><input type="text" name="phone_number"></th>
+        </tr>
+        <tr>
+            <th>password</th>
+            <th><input type="password" name="password" id="password" onkeyup='check();'></th>
+        </tr>
+        <tr>
+            <th>password_confirm</th>
+            <th><input type="password" name="password_confirm" id="confirm_password" onkeyup='check();'></th>
+            <th><span id='message'></span></th>
+        </tr>
+        <tr>
+            <th>grant_permission</th>
+            <th><select name="grant_permission">
+                    <option value="True">teacher</option>
+                    <option value="">student</option>
+                </select>
+            </th>
+        </tr>
+        <tr>
+            <th></th>
+            <th><input type="submit" value="add" id="submit"></th>
+        </tr>
+    </table>
+</form>
+<form action="{{url_for('admin_account_management_upload_file')}}" method="post" enctype="multipart/form-data">
+    <h1>add a file.csv accounts</h1>
+    <table>
+        <tr>
+            <th>upload file</th>
+            <th><input type="file" name="file"></th>
+        </tr>
+        <tr>
+            <th colspan="2"><input type="submit" value="upload"></th>
+        </tr>
+    </table>
+</form>
+<form action="{{url_for('admin_account_management_search_account')}}" method="get">
+    <h1>management a account</h1>
+    <div class="search">
+        <input type="text" name="search" placeholder="search">
+        <input type="submit" value="search">
+    </div>
+</form>
+
+<div class="user">
+    <table>
+        <tr>
+            <th>username</th>
+            <th>email</th>
+            <th>phone_number</th>
+            <th>grant_permission</th>
+            <th>delete</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{user.username}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.phone_number}}</td>
+            <td>{{user.grant_permission}}</td>
+            <td><a href="{{url_for('admin_account_management_edit_account',user_id=user.id)}}">edit</a></td>
+            <td><a href="{{url_for('admin_account_management_delete_account',user_id=user.id)}}">delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="{{ url_for('static',filename='js/check_password.js') }}"></script>
+{% endblock %}
