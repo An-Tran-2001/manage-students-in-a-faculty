@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from student_management.models import *
 
-UPLOAD_FOLDER = 'path/upload'
+UPLOAD_FOLDER = 'student_management/path/upload'
 ALLOWED_EXTENSIONS = {'csv'}
 
 app = Flask(__name__)

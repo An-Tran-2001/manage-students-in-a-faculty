@@ -6,6 +6,7 @@ subject system
 {% endblock %}
 
 {% block content %}
+<p>{{success}}</p>
 <h1>ADD A SUBJECT</h1>
 <form action="{{ url_for('admin_subject_add') }}" method="get">
     <table>
@@ -19,8 +20,8 @@ subject system
             <th><input type="text" name="subject_name"></th>
         </tr>
         <tr>
-            <th>Subject Credit:</th>
-            <th><input type="text" name="number_of_credit"></th>
+            <th>Number of Credit:</th>
+            <th><input type="number" name="number_of_credit"></th>
         </tr>
         <tr>
             <th>Teacher name:</th>
@@ -42,6 +43,7 @@ subject system
         <input type="submit" value="search">
     </form>
 </div>
+
 <h1>LIST SUBJECT</h1>
 <table>
     <tr>
@@ -56,9 +58,11 @@ subject system
         <td>{{subject.subject_name}}</td>
         <td>{{subject.number_of_credits}}</td>
         <td>{{subject.teacher_name}}</td>
-        <td><a href="{{url_for('admin_subject_management_edit',subject_id=subject.id)}}">edit</a></td>
-        <td><a href="{{url_for('admin_subject_management_delete',subject_id=subject.id)}}">delete</a></td>
+        <td><a href="{{url_for('admin_subject_edit',subject_id=subject.id)}}">edit</a></td>
+        <td><a href="{{url_for('admin_subject_delete',subject_id=subject.id)}}">delete</a></td>
     </tr>
     {% endfor %}
 </table>
+
+
 {% endblock %}

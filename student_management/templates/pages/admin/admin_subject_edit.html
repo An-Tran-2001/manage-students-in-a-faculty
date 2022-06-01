@@ -1,0 +1,33 @@
+{% extends "pages/base.html" %}
+
+
+{% block title %}
+Subject Management System
+{% endblock %}
+
+{% block content %}
+<h1>EDIT SUBJECT</h1>
+<form action="{{ url_for('admin_subject_edit') }}" method="get">
+    <table>
+        <tr>
+            <th>Subject Code:</th>
+            <th><input type="text" name="subject_code" value="{{subject.subject_code}}"></th>
+        </tr>
+
+        <tr>
+            <th>Subject Name:</th>
+            <th><input type="text" name="subject_name" value="{{subject.subject_name}}"></th>
+        </tr>
+        <tr>
+            <th>Number of Credit:</th>
+            <th><input type="number" name="number_of_credit" value="{{subject.number_of_credits}}"></th>
+        </tr>
+        <tr>
+            <th>Teacher name:</th>
+            <th><input type="text" name="teacher_name" value="{{subject.teacher_name}}"></th>
+        <tr>
+            <td colspan="2"><button type="submit" name="subject_id" value="{{subject.id}}">Submit</button></td>
+        </tr>
+    </table>
+</form>
+{% endblock %}
