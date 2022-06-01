@@ -1,0 +1,67 @@
+{% extends "pages/base.html" %}
+
+
+{% block title %}
+Class Management System
+{% endblock %}
+
+
+{% block content %}
+<p>{{success}}</p>
+<h1>ADD CLASS</h1>
+<form action="{{url_for('admin_add_class')}}" method="get">
+    <table>
+        <tr>
+            <th>Class Code:</th>
+            <th><input type="text" name="class_code"></th>
+        </tr>
+        <tr>
+            <th>Class Name:</th>
+            <th><input type="text" name="class_name"></th>
+        </tr>
+        <tr>
+            <th>Lead teacher name:</th>
+            <th><input type="text" name="lead_teacher_name"></th>
+        </tr>
+        <tr>
+            <th>Phone Number of teacher:</th>
+            <th><input type="number" name="phone_number_of_lead_teacher"></th>
+        </tr>
+        <tr>
+            <th>Student number:</th>
+            <th><input type="number" name="student_number"></th>
+        </tr>
+        <tr>
+            <th colspan="2"><input type="submit" value="add"></ths>
+        </tr>
+    </table>
+</form>
+<h1>ADD CLASS WITH .CSV</h1>
+<form action="{{ url_for('admin_add_class_csv') }}" method="post" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <input type="submit" value="add">
+</form>
+<h1>Class List</h1>
+<table>
+    <tr>
+        <th>Class Code</th>
+        <th>Class Name</th>
+        <th>Lead teacher name</th>
+        <th>Phone Number of teacher</th>
+        <th>Student number</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    {% for class in classes %}
+    <tr>
+        <td>{{class.class_code}}</td>
+        <td>{{class.class_name}}</td>
+        <td>{{class.lead_teacher_name}}</td>
+        <td>{{class.phone_number_of_lead_teacher}}</td>
+        <td>{{class.student_number}}</td>
+        <td><a href="{{url_for('admin_edit_class', class_id=class.id)}}">Edit</a></td>
+        <td><a href="{{url_for('admin_delete_class', class_id=class.id)}}">Delete</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

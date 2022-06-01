@@ -28,6 +28,7 @@ import student_management.home_search
 import student_management.edit_admin
 import student_management.admin_subject_management
 import student_management.admin_account_management
+import student_management.admin_class_management
 import student_management.edit_user
 
 
