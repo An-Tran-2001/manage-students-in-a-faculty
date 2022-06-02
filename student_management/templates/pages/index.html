@@ -3,11 +3,9 @@
 {% block title %}
 Student Management
 {% endblock %}
-
-{ % block styles %}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='static/styles/file1.css') }}"># link cái file vàođây mỗi tran g chỉ cần copy và link file khác
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='static/styles/file1.css') }}">
 {% endblock %}
-
 {% block content %}
 <div class="container">
     <div class="row">
