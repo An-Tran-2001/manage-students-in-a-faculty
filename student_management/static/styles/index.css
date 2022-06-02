@@ -1,0 +1,59 @@
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  background: #333;
+  color: #eee;
+  padding: 12px 24px;
+  margin-bottom: 40px;
+}
+
+.header-title {
+  flex: 1;
+}
+
+.header-title h1 {
+  font-weight: 600;
+  padding-bottom: 10px;
+  color: #fff;
+}
+
+.header-title p {
+  color: #ccc;
+  font-weight: 300;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.search-form form {
+  display: flex;
+  width: 60%;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+}
+
+.form-group label {
+  align-self: center;
+  margin-left: 12px;
+  font-size: 20px;
+}
+
+.form-group input {
+  flex: 1;
+  margin: 0 12px;
+  border-radius: 12px;
+  border-width: 2px;
+  background-color: #eee;
+  font-size: 18px;
+  padding: 0 12px;
+  outline: none;
+}
