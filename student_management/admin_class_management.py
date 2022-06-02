@@ -64,7 +64,7 @@ def admin_add_class_csv():  # phần này đã đc cải tiến bởi AI
                         csv_file, delimiter=',')  # đọc file csv
                     line_count = 0  # đếm số dòng của file csv
                     for row in csv_reader:  # duyệt từng dòng trong file csv
-                        if line_count == 0:  # nếu là dòng đầu tiên thì bỏ qua
+                        if line_count == 0:  # nếu là dòng đầu tiên thì bỏ qua bởi vì dòng đầu tiên lưu tên trường nên ko cần lưu ko thì có thể bỏ
                             line_count += 1
                         else:  # nếu không phải dòng đầu tiên thì thực hiện
                             class_code = row[0]
