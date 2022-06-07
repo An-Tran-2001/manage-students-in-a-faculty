@@ -37,8 +37,14 @@ class Class(db.Model):
     class_name = db.Column(db.String(255), nullable=False)
     lead_teacher_name = db.Column(db.String(255), nullable=False)
     phone_number_of_lead_teacher = db.Column(db.String(255), nullable=False)
-    student_number = db.Column(db.Integer, nullable=False)
+    student_number = db.Column(db.Integer, nullable=True)# sẽ đếms số ng mang trong mình id của lớp
 
+class Semester(db.Model):
+    __tablename__ = 'semesters'
+    id = db.Column(db.Integer, primary_key=True)
+    semester_code = db.Column(db.String(255), nullable=False)
+    start_date = db.Column(db.DateTime, nullable=False)
+    end_date = db.Column(db.DateTime, nullable=False)
 
 class Student(db.Model):
     __tablename__ = 'students'
@@ -50,4 +56,8 @@ class Student(db.Model):
         db.Integer, db.ForeignKey('classes.id'), nullable=False)
     id_subject = db.Column(db.Integer, db.ForeignKey(
         'subjects.id'), nullable=False)
-    score = db.Column(db.Integer, nullable=False)
+    final_score = db.Column(db.Integer, nullable=True)
+    test_score = db.Column(db.Integer, nullable=True)
+    specialized_score = db.Column(db.Integer, nullable=True)
+    average_score = db.Column(db.Integer, nullable=True)
+    semester_id = db.Column(db.Integer, db.ForeignKey('semesters.id'), nullable=False)

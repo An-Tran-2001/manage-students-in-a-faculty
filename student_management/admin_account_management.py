@@ -57,15 +57,20 @@ def load_file():
     file = open(os.path.join(app.config['UPLOAD_FOLDER'], filename), 'r')# r ở đây là read đọc file, appconfig là địa chỉ của file đã khai báo ở trên file __init__
     data = csv.reader(file)
     for username, password, email, phone_number, grant_permission in data:
-        created_at = datetime.datetime.now()
-        if grant_permission == 'True':
-            grant_permission = True
+        user = User.query.filter_by(username=username)
+        if user.count() == 0:
+            created_at = datetime.datetime.now()
+            if grant_permission == 'True':
+                grant_permission = True
+            else:
+                grant_permission = False
+            user = User(username=username, password=password, email=email,
+                        phone_number=phone_number, grant_permission=grant_permission, created_at=created_at)
+            db.session.add(user)
+            db.session.commit()
         else:
-            grant_permission = False
-        user = User(username=username, password=password, email=email,
-                    phone_number=phone_number, grant_permission=grant_permission, created_at=created_at)
-        db.session.add(user)
-        db.session.commit()
+            flash('User {} already exists'.format(username))
+            return redirect(url_for('admin_account_management'))
     return render_template("pages/admin/account_management.html", success="Add account successfully")
 
 

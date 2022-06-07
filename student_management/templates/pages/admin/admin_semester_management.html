@@ -1,0 +1,56 @@
+{% extends "pages/base.html" %}
+
+
+{% block title %}
+Semester Management System
+{% endblock %}
+
+    
+{% block content %}
+<p>{{success}}</p>
+<h1>ADD SEMSTER</h1>
+<form action="{{url_for('admin_add_semester')}}" method="get">
+    <table>
+        <tr>
+            <th>Semster Code:</th>
+            <th><input type="text" name="semester_code"></th>
+        </tr>
+        <tr>
+            <th>Semster Start Date:</th>
+            <th><input type="date" name="start_date"></th>
+        </tr>
+        <tr>
+            <th>Semster End Date:</th>
+            <th><input type="date" name="end_date"></th>
+        </tr>
+        <tr>
+            <th colspan="2"><input type="submit" value="add"></ths>
+        </tr>
+    </table>
+</form>
+<h1>SEMSETER ADD LIST.CSV</h1>
+<form action="{{ url_for('admin_add_semester_csv') }}" method="post" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <input type="submit" value="add">
+</form>
+{{flash}}
+<h1>SEMSTER LIST</h1>
+<table>
+    <tr>
+        <th>Semester Code</th>
+        <th>Semester Start Date</th>
+        <th>Semester End Date</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    {% for semester in semesters %}
+    <tr>
+        <td>{{semester.semester_code}}</td>
+        <td>{{semester.start_date}}</td>
+        <td>{{semester.end_date}}</td>
+        <td><a href="{{url_for('admin_edit_semester', semester_code=semester.semester_code)}}">Edit</a></td>
+        <td><a href="{{url_for('admin_delete_semester', semester_code=semester.semester_code)}}">Delete</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

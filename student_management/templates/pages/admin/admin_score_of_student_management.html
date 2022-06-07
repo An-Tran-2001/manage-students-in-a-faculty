@@ -1,0 +1,67 @@
+{% extends "pages/base.html" %}
+
+{% block title %}
+Score of Student Management
+{% endblock %}
+
+{% block content %}
+<p>{{success}}</p>
+<h1>ADD a score of student</h1>
+<form action="{{url_for('admin_add_score_of_student')}}" method="get">
+    <table>
+        <tr>
+            <th>Student Code:</th>
+            <th><input type="text" name="student_code"></th>
+        </tr>
+        <tr>
+            <th>Name:</th>
+            <th><input type="text" name="student_name"></th>
+        </tr>
+        <tr>
+            <th>Birthday:</th>
+            <th><input type="text" name="student_birthday"></th>
+        </tr>
+        <tr>
+            <th>class:</th>
+            <th><select name="id_class">
+                {% for class in classes %}
+                <option value="{{class.id}}">{{class.class_code}}</option>
+                {% endfor %}
+            </select></th>
+        </tr>
+        <tr>
+            <th>Subject:</th>
+            <th><select name="id_subject">
+                {% for subject in subjects %}
+                <option value="{{subject.id}}">{{subject.subject_code}}</option>
+                {% endfor %}
+            </select></th>
+        </tr>
+        <tr>
+            <th>final core:</th>
+            <th><input type="text" name="final_score"></th>
+        </tr>
+        <tr>
+            <th>test core:</th>
+            <th><input type="text" name="test_score"></th>
+        </tr>
+        <tr>
+            <th>specialized core:</th>
+            <th><input type="text" name="specialized_score"></th>
+        </tr>
+        <tr>
+            <th>semester:</th>
+            <th><select name="id_semester">
+                {% for semester in semesters %}
+                <option value="{{semester.id}}">{{semester.semester_code}} - {{semester.start_date}} - {{semester.end_date}}</option>
+                {% endfor %}
+            </select></th>
+        </tr>
+        <tr>
+            <th colspan="2"><input type="submit" value="add"></th>
+        </tr>
+    </table>
+</form>
+<h1>Add list </h1>
+
+{% endblock %}
