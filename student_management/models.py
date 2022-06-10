@@ -46,18 +46,42 @@ class Semester(db.Model):
     start_date = db.Column(db.DateTime, nullable=False)
     end_date = db.Column(db.DateTime, nullable=False)
 
+# class Student(db.Model):# chia ra 2 class student and score  
+#     __tablename__ = 'students'
+#     id = db.Column(db.Integer, primary_key=True)
+#     student_code = db.Column(db.String(255), nullable=False)
+#     student_name = db.Column(db.String(255), nullable=False)
+#     student_birthday = db.Column(db.String(255), nullable=False)
+#     id_student_class = db.Column(
+#         db.Integer, db.ForeignKey('classes.id'), nullable=False)
+#     id_subject = db.Column(db.Integer, db.ForeignKey(
+#         'subjects.id'), nullable=False)
+#     final_score = db.Column(db.Integer, nullable=True)
+#     test_score = db.Column(db.Integer, nullable=True)
+#     specialized_score = db.Column(db.Integer, nullable=True)
+#     average_score = db.Column(db.Integer, nullable=True)
+#     semester_id = db.Column(db.Integer, db.ForeignKey('semesters.id'), nullable=False)
+
 class Student(db.Model):
     __tablename__ = 'students'
-    id = db.Column(db.Integer, primary_key=True)
-    student_code = db.Column(db.String(255), nullable=False)
+    student_code = db.Column(db.String(255), primary_key=True)
     student_name = db.Column(db.String(255), nullable=False)
+    student_sex = db.Column(db.String(255), nullable=False)
     student_birthday = db.Column(db.String(255), nullable=False)
     id_student_class = db.Column(
         db.Integer, db.ForeignKey('classes.id'), nullable=False)
+    student_course = db.Column(db.Integer, nullable=False)
+    student_study_time = db.Column(db.Float, nullable=False)
+
+class Score(db.Model):
+    __tablename__ = 'scores'
+    id = db.Column(db.Integer, primary_key=True)
+    student_code = db.Column(db.String(255), db.ForeignKey('students.student_code'),nullable=False)
     id_subject = db.Column(db.Integer, db.ForeignKey(
         'subjects.id'), nullable=False)
-    final_score = db.Column(db.Integer, nullable=True)
-    test_score = db.Column(db.Integer, nullable=True)
-    specialized_score = db.Column(db.Integer, nullable=True)
-    average_score = db.Column(db.Integer, nullable=True)
     semester_id = db.Column(db.Integer, db.ForeignKey('semesters.id'), nullable=False)
+    specialized_score = db.Column(db.Float, nullable=True)
+    test_score = db.Column(db.Float, nullable=True)
+    final_score = db.Column(db.Float, nullable=True)
+    average_score = db.Column(db.Float, nullable=True)
+    subject_name = db.Column(db.String(255), nullable=True)

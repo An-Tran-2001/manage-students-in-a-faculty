@@ -1,0 +1,119 @@
+{% extends "pages/base.html" %}
+
+{% block title %}
+Student Management
+{% endblock %}
+
+{% block content %}
+<p>{{success}}</p>
+<h1>ADD a student</h1>
+<form action="{{url_for('admin_add_student')}}" method="get">
+    <table>
+        <tr>
+            <th>Student Code:</th>
+            <th><input type="text" name="student_code"></th>
+        </tr>
+        <tr>
+            <th>Name:</th>
+            <th><input type="text" name="student_name"></th>
+        </tr>
+        <tr>
+            <th>Sex:</th>
+            <th><select name="sex">
+                <option value="nam">Nam</option>
+                <option value="nu">Nữ</option>
+                <option value="khac">hác</option>
+            </select></th>
+        </tr>
+        <tr>
+            <th>Birthday:</th>
+            <th><input type="text" name="student_birthday"></th>
+        </tr>
+        <tr>
+            <th>class:</th>
+            <th><select name="id_class">
+                {% for class in classes %}
+                <option value="{{class.id}}">{{class.class_code}}</option>
+                {% endfor %}
+            </select></th>
+        </tr>
+        <tr>
+            <th>Student course:</th>
+            <th><input type="text" name="student_course"></th>
+        </tr>
+        <tr>
+            <th>Study Time:</th>
+            <th><select name="student_study_time">
+                <option value="4">4</option>
+                <option value="4.5">4.5</option>
+                <option value="5">5</option>
+            </select></th>
+        </tr>
+        <tr>
+            <th colspan="2"><input type="submit" value="ADD"></th>
+        </tr>
+    </table>
+</form>
+<h1>Add list student.csv</h1>
+<form action="{{url_for('admin_add_list_student')}}" method="post" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <th>File:</th>
+            <th><input type="file" name="file"></th>
+        </tr>
+        <tr>
+            <th colspan="2"><input type="submit" value="ADD"></th>
+        </tr>
+    </table>
+</form>
+<h1>Search a Student</h1>
+<div class="search">
+    <form action="{{url_for('admin_search_student')}}" method="get">
+        <tr>
+            <th>Student width Code:</th>
+            <th><input type="text" name="student_code"></th>
+            <th><input type="submit" value="Search" onclick="document.getElementById('information').style.display='table'"></th>
+        </tr>
+    </form>
+</div>
+<table id="information" {{styles}}>
+    <tr>
+        <th>Key</th>
+        <th>Information</th>
+    </tr>
+    <tr>
+        <th>Student Code:</th>
+        <th>{{student.student_code}}</th>
+    </tr>
+    <tr>
+        <th>Name:</th>
+        <th>{{student.student_name}}</th>
+    </tr>
+    <tr>
+        <th>Sex:</th>
+        <th>{{student.student_sex}}</th>
+    </tr>
+    <tr>
+        <th>Birthday:</th>
+        <th>{{student.student_birthday}}</th>
+    </tr>
+    <tr>
+        <th>Class:</th>
+        <th>{{class_.class_code}}</th>
+    </tr>
+    <tr>
+        <th>Student course:</th>
+        <th>{{student.student_course}}</th>
+    </tr>
+    <tr>
+        <th>Study Time:</th>
+        <th>{{student.student_study_time}}</th>
+    </tr>
+    <tr>
+        <th><a href="{{url_for('admin_student_edit',student_code=student.student_code)}}" class="button">Edit</a></th>
+        <th><a href="{{url_for('admin_student_delete',student_code=student.student_code)}}" class="button">Delete</a></th>
+    </tr>
+</table>
+{% endblock %}
+
+    

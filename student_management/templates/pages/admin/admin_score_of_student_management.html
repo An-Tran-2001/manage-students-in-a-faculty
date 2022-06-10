@@ -14,22 +14,6 @@ Score of Student Management
             <th><input type="text" name="student_code"></th>
         </tr>
         <tr>
-            <th>Name:</th>
-            <th><input type="text" name="student_name"></th>
-        </tr>
-        <tr>
-            <th>Birthday:</th>
-            <th><input type="text" name="student_birthday"></th>
-        </tr>
-        <tr>
-            <th>class:</th>
-            <th><select name="id_class">
-                {% for class in classes %}
-                <option value="{{class.id}}">{{class.class_code}}</option>
-                {% endfor %}
-            </select></th>
-        </tr>
-        <tr>
             <th>Subject:</th>
             <th><select name="id_subject">
                 {% for subject in subjects %}
@@ -38,16 +22,16 @@ Score of Student Management
             </select></th>
         </tr>
         <tr>
-            <th>final core:</th>
-            <th><input type="text" name="final_score"></th>
+            <th>final score:</th>
+            <th><input type="int" name="final_score"></th>
         </tr>
         <tr>
-            <th>test core:</th>
-            <th><input type="text" name="test_score"></th>
+            <th>test score:</th>
+            <th><input type="int" name="test_score"></th>
         </tr>
         <tr>
-            <th>specialized core:</th>
-            <th><input type="text" name="specialized_score"></th>
+            <th>specialized score:</th>
+            <th><input type="int" name="specialized_score"></th>
         </tr>
         <tr>
             <th>semester:</th>
@@ -62,6 +46,50 @@ Score of Student Management
         </tr>
     </table>
 </form>
-<h1>Add list </h1>
+<h1>Add list .csv</h1>
+<form action="{{url_for('admin_add_score_of_student_csv')}}" method="post" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <th>File:</th>
+            <th><input type="file" name="file"></th>
+            <th colspan="2"><input type="submit" value="add"></th>
+        </tr>
+    </table>
+</form>
+<h1>management a student score</h1>
+<form action="{{url_for('admin_search_score_of_student')}}" method="get">
+    <div class="search">
+        <label for="student_code">search with student code:</label>
+        <input type="text" name="student_code" placeholder="search">
+        <input type="submit" value="search">
+    </div>
+</form>
+{% if scores %}
+    {% for semester in scores.keys() %}
+    <h1>{{semester}}</h1>
+    <table>
+        <tr>
+            <th>Student Code</th>
+            <th>Subject</th>
+            <th>Final Score</th>
+            <th>Test Score</th>
+            <th>Specialized Score</th>
+            <th>Average Score</th>
+        </tr>
+        {% for score in scores[semester] %}
+        <tr>
+            <td>{{score.student_code}}</td>
+            <td>{{score.subject_name}}</td>
+            <td>{{score.final_score}}</td>
+            <td>{{score.test_score}}</td>
+            <td>{{score.specialized_score}}</td>
+            <td>{{score.average_score}}</td>
+            <td><a href="{{url_for('admin_score_edit',score_id=score.id)}}" class="button">Edit Score</a></td>
+            <td><a href="{{url_for('admin_score_delete',score_id=score.id)}}" class="button">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endfor %}
+{% endif %}
 
 {% endblock %}
