@@ -1,0 +1,40 @@
+{% extends "pages/base.html" %}
+
+
+{% block title %}
+Score of Student Management
+{% endblock %}
+
+{% block content %}
+<h1>EDIT SCORE</h1>
+<form action="{{ url_for('admin_score_edit') }}" method="get">
+    <table>
+        <tr>
+            <th>Student code:</th>
+            <th>{{score.student_code}}</th>
+        </tr>
+        <tr>
+            <th>Subject code:</th>
+            <th>{{score.subject_name}}</th>
+        </tr>
+        <tr>
+            <th>Semester</th>
+            <th>{{score.semester_ID}}</th>
+        </tr>
+        <tr>
+            <th>Final Score:</th>
+            <th><input type="number" name="final_score" value="{{score.final_score}}"></th>
+        </tr>
+        <tr>
+            <th>Test Score:</th>
+            <th><input type="number" name="test_score" value="{{score.test_score}}"></th>
+        </tr>
+        <tr>
+            <th>Specialized Score:</th>
+            <th><input type="number" name="specialized_score" value="{{score.specialized_score}}"></th>
+        </tr>
+        <tr>
+            <th colspan="2"><button name="score_id" value="{{score.id}}">Submit</button></th>
+    </table>
+</form>
+{% endblock %}

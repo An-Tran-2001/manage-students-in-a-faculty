@@ -17,7 +17,7 @@ Score of Student Management
             <th>Subject:</th>
             <th><select name="id_subject">
                 {% for subject in subjects %}
-                <option value="{{subject.id}}">{{subject.subject_code}}</option>
+                <option value="{{subject.id}}">{{subject.subject_code}} - {{subject.subject_name}}</option>
                 {% endfor %}
             </select></th>
         </tr>

@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template,request
 from student_management.models import *
 
 UPLOAD_FOLDER = 'student_management/path/upload'
@@ -19,7 +19,11 @@ def new_table():
 
 @app.route("/")
 def index():
-    return render_template("pages/index.html")
+    score = None # điều kiện của phần tìm kiếm cần để tìm kiếm dữ liệu
+    error = request.args.get('error')
+    if error:
+        return render_template('pages/index.html', error=error, score=score)
+    return render_template("pages/index.html", score=score)
 
 
 
