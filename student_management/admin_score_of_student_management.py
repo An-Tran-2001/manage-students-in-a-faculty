@@ -83,7 +83,7 @@ def admin_search_score_of_student():
     scores={}
     semesters = Semester.query.all()
     for i in semesters:
-        scores[f"{i.semester_code} - {i.start_date} - {i.end_date}"] = Score.query.filter(and_(Score.student_code==student_code, Score.semester_id==i.id)).all()
+        scores[f"{i.semester_code}: {i.start_date} -> {i.end_date}"] = Score.query.filter(and_(Score.student_code==student_code, Score.semester_id==i.id)).all()
     for information in scores.values():
         for score in information:
             score.subject_name = Subject.query.filter_by(id=score.id_subject).first().subject_name

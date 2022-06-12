@@ -8,7 +8,10 @@ def login():
     if 'user' in session:
         user_id = session['user']
         user = User.query.filter_by(id=user_id).first()
-        return render_template("pages/admin/home_admin.html", user=user)#lưu đăng nhập 
+        if user.grant_permission:
+            return render_template("pages/admin/home_admin.html", user=user)#lưu đăng nhập 
+        else:
+            return redirect(url_for('home_user'))
     else:
         name = request.args.get('username')
         password = request.args.get('password')

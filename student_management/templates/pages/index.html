@@ -25,7 +25,7 @@ Student Management
       <form action="{{ url_for('search') }}" method="get">
         <div class="form-group">
           <label for="student_code">Search</label>
-          <input type="text" class="form-control" id="search" name="student_code" placeholder="Search with student code" onkeyup="if (document.getElementById('search') != none){document.getElementById('submit').disabled = False} else{ document.getElementById('submit').disabled = True }">
+          <input type="text" class="form-control" id="search" name="student_code" placeholder="Search with student code" onkeyup="if (document.getElementById('search') == False){document.getElementById('submit').disabled = False} else{ document.getElementById('submit').disabled = True }">
         </div>
         <button type="submit" class="btn btn-primary" id="submit">Search</button>
       </form>
@@ -80,29 +80,32 @@ Student Management
         </tr>
       </table>
     </div>
-    {% for semester in scores.keys() %}
-    <h1>{{semester}}</h1>
-    <table>
-        <tr>
-            <th>Student Code</th>
-            <th>Subject name</th>
-            <th>Final Score</th>
-            <th>Test Score</th>
-            <th>Specialized Score</th>
-            <th>Average Score</th>
-        </tr>
-        {% for score in scores[semester] %}
-        <tr>
-            <td>{{score.student_code}}</td>
-            <td>{{score.subject_name}}</td>
-            <td>{{score.final_score}}</td>
-            <td>{{score.test_score}}</td>
-            <td>{{score.specialized_score}}</td>
-            <td>{{score.average_score}}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    {% endfor %}
+    <div class="score">
+      {% for semester in scores.keys() %}
+      <h1>Semester {{semester}}</h1>
+      <table>
+          <tr>
+              <th>Student Code</th>
+              <th>Subject name</th>
+              <th>Final Score</th>
+              <th>Test Score</th>
+              <th>Specialized Score</th>
+              <th>Average Score</th>
+          </tr>
+          {% for score in scores[semester] %}
+          <tr>
+              <td>{{score.student_code}}</td>
+              <td>{{score.subject_name}}</td>
+              <td>{{score.final_score}}</td>
+              <td>{{score.test_score}}</td>
+              <td>{{score.specialized_score}}</td>
+              <td>{{score.average_score}}</td>
+          </tr>
+          {% endfor %}
+      </table>
+      {% endfor %}
+    </div>
+    
   {% endif %}
 </div>
 {% endblock %}

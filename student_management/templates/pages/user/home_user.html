@@ -5,4 +5,81 @@ Student
 {% endblock %}
 
 {% block content %}
+<p>{{error}}</p>
+    {% if error == '' %}
+    <div class="information">
+        <table>
+        <tr>
+            <th>Student code:</th>
+            <th>{{student.student_code}}</th>
+        </tr>
+        <tr>
+            <th>Student name:</th>
+            <th>{{student.student_name}}</th>
+        </tr>
+        <tr>
+            <th>Student sex:</th>
+            <th>{{student.student_sex}}</th>
+        </tr>
+        <tr>
+            <th>Student birthday:</th>
+            <th>{{student.student_birthday}}</th>
+        </tr>
+        <tr>
+            <th>Student course:</th>
+            <th>{{student.student_course}}</th>
+        </tr>
+        <tr>
+            <th>Student study time:</th>
+            <th>{{student.student_study_time}}</th>
+        </tr>   
+        </table>
+        <p>-----------------------------></p>
+        <table>
+        <tr>
+            <th>Class_code:</th>
+            <th>{{class_.class_code}}</th>
+        </tr>
+        <tr>
+            <th>Class_name:</th>
+            <th>{{class_.class_name}}</th>
+        </tr>
+        <tr>
+            <th>Lead teacher name:</th>
+            <th>{{class_.lead_teacher_name}}</th>
+        </tr>
+        <tr>
+            <th>Phone number of lead teacher</th>
+            <th>{{class_.phone_number_of_lead_teacher}}</th>
+        </tr>
+        </table>
+    </div>
+    <a href="{{url_for('user_student_out')}}">LOGOUT</a>
+    <div class="score">
+        {% for semester in scores.keys() %}
+        <h1>Semester {{semester}}</h1>
+        <table>
+            <tr>
+                <th>Student Code</th>
+                <th>Subject name</th>
+                <th>Final Score</th>
+                <th>Test Score</th>
+                <th>Specialized Score</th>
+                <th>Average Score</th>
+            </tr>
+            {% for score in scores[semester] %}
+            <tr>
+                <td>{{score.student_code}}</td>
+                <td>{{score.subject_name}}</td>
+                <td>{{score.final_score}}</td>
+                <td>{{score.test_score}}</td>
+                <td>{{score.specialized_score}}</td>
+                <td>{{score.average_score}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endfor %}
+    </div>
+
+    {% endif %}
 {% endblock %}
