@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup # bo thu vien de khi chay tren trang flask 
 
 setup(
     name='student_management',

@@ -5,7 +5,7 @@ UPLOAD_FOLDER = 'student_management/path/upload'
 ALLOWED_EXTENSIONS = {'csv'}
 
 app = Flask(__name__)
-app.secret_key = 'secret123'
+app.secret_key = 'secret123' # đây la mã hóa của sesion bat buoc neu muon su dung session
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:admin@localhost:5432/student_management"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False

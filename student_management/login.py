@@ -5,11 +5,11 @@ from student_management import app
 
 @app.route("/login")
 def login():
-    if 'user' in session:
-        user_id = session['user']
+    if 'user' in session: # luu dang nhap
+        user_id = session['user'] # lay ra user id trong session
         user = User.query.filter_by(id=user_id).first()
-        if user.grant_permission:
-            return render_template("pages/admin/home_admin.html", user=user)#lưu đăng nhập 
+        if user.grant_permission:# kiem tra user co quyen truy cap hay ko
+            return render_template("pages/admin/home_admin.html", user=user)
         else:
             return redirect(url_for('home_user'))
     else:

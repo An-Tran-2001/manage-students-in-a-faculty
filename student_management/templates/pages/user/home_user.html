@@ -1,17 +1,22 @@
 {% extends "pages/base.html" %}
-
+<!-- link den file goc da chia -->
+<!--  Ngôn ngữ jinja2 cho phep tạo ra từng khối để quản lý -->
 {% block title %}
+<!-- từng khối đã tạo ra với câu lệnh bleck tenkhoi -->
 Student
 {% endblock %}
 
 {% block content %}
 <p>{{error}}</p>
-    {% if error == '' %}
+<a href="{{url_for('user_student_out')}}">LOGOUT</a>
+    {% if error == '' %}  
+    <!-- ngon ngu jinja2 kiem tra xem co loi ko -->
     <div class="information">
         <table>
         <tr>
             <th>Student code:</th>
             <th>{{student.student_code}}</th>
+            <!-- lấy ra từng thuộc tính trong class day -->
         </tr>
         <tr>
             <th>Student name:</th>
@@ -54,9 +59,9 @@ Student
         </tr>
         </table>
     </div>
-    <a href="{{url_for('user_student_out')}}">LOGOUT</a>
     <div class="score">
         {% for semester in scores.keys() %}
+        <!-- chạy vòng for lấy ra từng key của dict -->
         <h1>Semester {{semester}}</h1>
         <table>
             <tr>
@@ -68,6 +73,7 @@ Student
                 <th>Average Score</th>
             </tr>
             {% for score in scores[semester] %}
+            <!-- chay tung phan tu của vaue trong dict tai vi value la 1 list -->
             <tr>
                 <td>{{score.student_code}}</td>
                 <td>{{score.subject_name}}</td>
