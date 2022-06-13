@@ -74,13 +74,13 @@ def admin_add_semester_csv():  # phần này đã đc cải tiến bởi AI
 @app.route('/admin_edit_semester')
 def admin_edit_semester():
     semester_id = request.args.get('semester_id')
-    semester = Semester.query.filter_by(id=semester_id).first()
+    semester = Semester.query.get(semester_id)
     return render_template('pages/admin/admin_edit_semester.html', semester=semester)
 
 @app.route('/admin_edit_semester_submit', methods=['GET', 'POST'])
 def admin_edit_semester_submit():
     semester_id = request.args.get('semester_id')
-    semester = Semester.query.filter_by(id=semester_id).first()
+    semester = Semester.query.get(semester_id)
     semester_code = request.args.get('semester_code')
     start_date = request.args.get('start_date')
     end_date = request.args.get('end_date')

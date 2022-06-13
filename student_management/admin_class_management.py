@@ -92,7 +92,19 @@ def admin_add_class_csv():  # phần này đã đc cải tiến bởi AI
 def admin_edit_class():
     if 'user' in session:
         class_id = request.args.get('class_id')
-        class_ = Class.query.filter_by(class_id=class_id).first()
+        class_ = Class.query.get(class_id)
+
+        class_code = request.args.get('class_code')
+        class_name = request.args.get('class_name')
+        lead_teacher_name = request.args.get('lead_teacher_name')
+        phone_number_of_lead_teacher = request.args.get('phone_number_of_lead_teacher')
+        if class_code and class_name and lead_teacher_name and phone_number_of_lead_teacher:
+            class_.class_code = class_code
+            class_.class_name = class_name
+            class_.lead_teacher_name = lead_teacher_name
+            class_.phone_number_of_lead_teacher = phone_number_of_lead_teacher
+            db.session.commit()
+            return redirect(url_for('admin_class_management', success="Edit class successfully"))
         return render_template('pages/admin/admin_edit_class.html', class_=class_)
     else:
         return redirect(url_for('login'))
@@ -102,7 +114,7 @@ def admin_edit_class():
 def admin_delete_class():
     if 'user' in session:
         class_id = request.args.get('class_id')
-        class_ = Class.query.filter_by(class_id=class_id).first()
+        class_ = Class.query.get(class_id)
         db.session.delete(class_)
         db.session.commit()
         return redirect(url_for('admin_class_management', success="Delete class successfully"))

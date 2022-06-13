@@ -1,8 +1,7 @@
 {% extends "pages/base.html" %}
 
-
 {% block title %}
-Score of Student Management
+edit score
 {% endblock %}
 
 {% block content %}
@@ -14,12 +13,12 @@ Score of Student Management
             <th>{{score.student_code}}</th>
         </tr>
         <tr>
-            <th>Subject code:</th>
-            <th>{{score.subject_name}}</th>
+            <th>Subject name:</th>
+            <th>{{subject.subject_name}}</th>
         </tr>
         <tr>
             <th>Semester</th>
-            <th>{{score.semester_ID}}</th>
+            <th>{{semester.semester_code}} - {{semester.start_date}} -{{semester.end_date}}</th>
         </tr>
         <tr>
             <th>Final Score:</th>

@@ -1,4 +1,5 @@
 from re import template
+from this import s
 from flask import flash, redirect, url_for, render_template, request, session
 from student_management.models import *
 import os
@@ -91,27 +92,32 @@ def admin_search_score_of_student():
 
     return render_template('pages/admin/admin_score_of_student_management.html', scores=scores, semesters=semesters, subjects=Subject.query.all())
 
+
 @app.route('/admin_score_edit')
 def admin_score_edit():
     score_id = request.args.get('score_id')
-    score = Score.query.filter_by(id=score_id).first()
+    score = Score.query.get(score_id)
+    semester = Semester.query.get(score.semester_id)
+    subject = Subject.query.get(score.id_subject)
+    
     final_score = request.args.get('final_score')
     test_score = request.args.get('test_score')
     specialized_score = request.args.get('specialized_score')
-    average_score = float(float(final_score)*0.6 + float(test_score)*0.3 + float(specialized_score)*0.1)
     if final_score and test_score and specialized_score:
+        average_score = float(float(final_score)*0.6 + float(test_score)*0.3 + float(specialized_score)*0.1)
         score.final_score = final_score
         score.test_score = test_score
         score.specialized_score = specialized_score
         score.average_score = average_score
         db.session.commit()
         return redirect(url_for('admin_score_of_student_management', success='edit score success'))
-    return template('pages/admin/admin_score_edit.html', score=score)
+
+    return render_template('pages/admin/admin_score_edit.html', score=score, semester=semester, subject=subject)
 
 @app.route('/admin_score_delete')
 def admin_score_delete():
     score_id = request.args.get('score_id')
-    score = Score.query.filter_by(id=score_id).first()
+    score = Score.query.get(score_id)
     db.session.delete(score)
     db.session.commit()
     return redirect(url_for('admin_score_of_student_management', success='delete score success'))

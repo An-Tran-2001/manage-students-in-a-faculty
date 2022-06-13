@@ -1,0 +1,51 @@
+{% extends "pages/base.html" %}
+
+{% block title %}
+edit student information
+{% endblock %}
+
+{% block content %}
+<form action="{{url_for('admin_student_edit')}}" method="get">
+    <div class="form-group">
+        <p>student code: {{student.student_code}}</p>
+    </div>
+    <div class="form-group">
+        <label for="student_name">student name:</label>
+        <input type="text" class="form-control" id="student_name" name="student_name" placeholder="student name"
+            value="{{student.student_name}}">
+    </div>
+    <div class="form-group">
+        <label for="student_sex">student sex:</label>
+        <select name="student_sex">
+            <option value="nam">Name</option>
+            <option value="nu">Nu</option>
+            <option value="khac">khac</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="student_birthday">student name:</label>
+        <input type="text" class="form-control" id="student_birthday" name="student_birthday" placeholder="student_birthday"
+            value="{{student.student_birthday}}">
+    </div>
+    <div class="form-group">
+        <label for="student_class">student class:</label>
+        <select name="student_class">
+            {% for class in classes %}
+            <option value="{{class.id}}">{{class.class_name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="student_course">student course:</label>
+        <input type="text" class="form-control" id="student_course" name="student_course"
+            placeholder="student_course" value="{{student.student_course}}">
+    </div>
+    <div class="form-group">
+        <label for="student_study_time">student study time:</label>
+        <input type="text" class="form-control" id="student_study_time" name="student_study_time"
+            placeholder="student_study_time" value="{{student.student_study_time}}">
+    </div>
+    <button class="btn btn-primary" type="submit" name="student_code" value="{{student.student_code}}">Submit</button>
+</form>
+{% endblock %}
+

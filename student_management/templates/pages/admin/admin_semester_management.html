@@ -48,8 +48,8 @@ Semester Management System
         <td>{{semester.semester_code}}</td>
         <td>{{semester.start_date}}</td>
         <td>{{semester.end_date}}</td>
-        <td><a href="{{url_for('admin_edit_semester', semester_code=semester.semester_code)}}">Edit</a></td>
-        <td><a href="{{url_for('admin_delete_semester', semester_code=semester.semester_code)}}">Delete</a></td>
+        <td><a href="{{url_for('admin_edit_semester', semester_id=semester.id)}}">Edit</a></td>
+        <td><a href="{{url_for('admin_delete_semester', semester_id=semester.id)}}">Delete</a></td>
     </tr>
     {% endfor %}
 </table>

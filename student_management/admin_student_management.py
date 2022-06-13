@@ -81,9 +81,25 @@ def admin_search_student():
 
 @app.route('/admin_student_edit')
 def admin_student_edit():
-    student_id = request.args.get('student_id')
-    student = Student.query.filter_by(id=student_id).first()
+    student_code = request.args.get('student_code')
+    student = Student.query.get(student_code)
     classes = Class.query.all()
+
+    student_name=request.args.get('student_name')
+    student_sex=request.args.get('student_sex')
+    student_birthday=request.args.get('student_birthday')
+    id_student_class=request.args.get('student_class')
+    student_course=request.args.get('student_course')
+    student_study_time=request.args.get('student_study_time')
+    if student_name and student_sex and student_birthday and id_student_class and student_course and student_study_time:
+        student.student_name=student_name
+        student.student_sex=student_sex
+        student.student_birthday=student_birthday
+        student.id_student_class=id_student_class
+        student.student_course=student_course
+        student.student_study_time=student_study_time
+        db.session.commit()
+        return redirect(url_for('admin_student_management', success='edit student success'))
     return render_template('pages/admin/admin_student_edit.html', student=student, classes=classes)
 
 @app.route('/admin_student_delete')
