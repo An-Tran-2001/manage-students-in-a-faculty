@@ -4,6 +4,10 @@
 account Management System
 {% endblock %}
 
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/base.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/admin/account_management.css') }}">
+{% endblock %}
 {% block content %}
 <p>{{success}}</p>
 <h1>add a account</h1>
@@ -50,9 +54,7 @@ account Management System
         <tr>
             <th>upload file</th>
             <th><input type="file" name="file"></th>
-        </tr>
-        <tr>
-            <th colspan="2"><input type="submit" value="upload"></th>
+            <th><input type="submit" value="upload"></th>
         </tr>
     </table>
 </form>

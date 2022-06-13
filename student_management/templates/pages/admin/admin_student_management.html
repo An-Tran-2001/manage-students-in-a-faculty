@@ -4,6 +4,11 @@
 Student Management
 {% endblock %}
 
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/base.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/admin/admin_student_management.css') }}">
+{% endblock %}
+
 {% block content %}
 <p>{{success}}</p>
 <h1>ADD a student</h1>
@@ -50,7 +55,7 @@ Student Management
             </select></th>
         </tr>
         <tr>
-            <th colspan="2"><input type="submit" value="ADD"></th>
+            <th colspan="2"><input type="submit" value="ADD" class="submit"></th>
         </tr>
     </table>
 </form>
@@ -60,9 +65,7 @@ Student Management
         <tr>
             <th>File:</th>
             <th><input type="file" name="file"></th>
-        </tr>
-        <tr>
-            <th colspan="2"><input type="submit" value="ADD"></th>
+            <th colspan="2"><input type="submit" value="ADD" class="submit"></th>
         </tr>
     </table>
 </form>

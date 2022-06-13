@@ -1,0 +1,27 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #8dfff9b4;
+}
+
+table{
+    border: 1px solid #000;
+    margin: 20px 0;
+    padding: 20px;
+    text-align: left;
+    border-radius: 10px;
+    background-color: rgba(17, 168, 255, 0.545);
+    color: #fff;
+}
+
+th,td{
+    padding: 2px 10px;
+}
+
+h1{
+    font-size: 30px;
+    margin: 20px;
+}

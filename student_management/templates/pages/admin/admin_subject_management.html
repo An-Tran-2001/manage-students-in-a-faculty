@@ -5,6 +5,11 @@
 subject system
 {% endblock %}
 
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/base.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/admin/admin_subject_management.css') }}">
+{% endblock %}
+
 {% block content %}
 <p>{{success}}</p>
 <h1>ADD A SUBJECT</h1>

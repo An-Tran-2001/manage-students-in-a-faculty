@@ -4,6 +4,11 @@
 Score of Student Management
 {% endblock %}
 
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/base.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/admin/admin_score_of_student_management.css') }}">
+{% endblock %}
+
 {% block content %}
 <p>{{success}}</p>
 <h1>ADD a score of student</h1>
