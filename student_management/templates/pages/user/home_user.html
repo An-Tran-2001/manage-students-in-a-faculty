@@ -6,9 +6,16 @@
 Student
 {% endblock %}
 
+{% block styles %}
+<!-- từng khối đã tạo ra với câu lệnh bleck tenkhoi -->
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/base.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/user/home_user.css') }}">
+{% endblock %}
+
+
 {% block content %}
 <p>{{error}}</p>
-<a href="{{url_for('user_student_out')}}">LOGOUT</a>
+<a href="{{url_for('user_student_out')}}" class="logout">LOGOUT</a>
     {% if error == '' %}  
     <!-- ngon ngu jinja2 kiem tra xem co loi ko -->
     <div class="information">
@@ -39,7 +46,7 @@ Student
             <th>{{student.student_study_time}}</th>
         </tr>   
         </table>
-        <p>-----------------------------></p>
+        <p><-----------------------------></p>
         <table>
         <tr>
             <th>Class_code:</th>
@@ -54,15 +61,15 @@ Student
             <th>{{class_.lead_teacher_name}}</th>
         </tr>
         <tr>
-            <th>Phone number of lead teacher</th>
+            <th>Phone number of lead teacher:</th>
             <th>{{class_.phone_number_of_lead_teacher}}</th>
         </tr>
         </table>
     </div>
     <div class="score">
-        {% for semester in scores.keys() %}
-        <!-- chạy vòng for lấy ra từng key của dict -->
-        <h1>Semester {{semester}}</h1>
+        <div class="box_score">
+          {% for semester in scores.keys() %}
+        <h1 class="name_semester">Semester {{semester}}</h1>
         <table>
             <tr>
                 <th>Student Code</th>
@@ -73,7 +80,6 @@ Student
                 <th>Average Score</th>
             </tr>
             {% for score in scores[semester] %}
-            <!-- chay tung phan tu của vaue trong dict tai vi value la 1 list -->
             <tr>
                 <td>{{score.student_code}}</td>
                 <td>{{score.subject_name}}</td>
@@ -85,7 +91,8 @@ Student
             {% endfor %}
         </table>
         {% endfor %}
-    </div>
+        </div>
+      </div>
 
     {% endif %}
 {% endblock %}

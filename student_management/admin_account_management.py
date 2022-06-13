@@ -1,10 +1,10 @@
 from flask import flash, redirect, url_for, render_template, request,session
 from student_management.models import *
 import os
-import csv
-import datetime
-from werkzeug.utils import secure_filename
-from student_management import app, ALLOWED_EXTENSIONS
+import csv # import thư viện đọc file
+import datetime # import thời gian
+from werkzeug.utils import secure_filename # import thư viện để đẩy và lưu file
+from student_management import app, ALLOWED_EXTENSIONS # iport biến app đã khai báo và hàm allowed_file đã khai báo trong file init file khởi chạy khi imoprt package. hàm allowed_file để kiểm tra đuôi file có phải là các đuôi được phép không
 
 
 @app.route("/admin_account_management")
@@ -55,22 +55,17 @@ def admin_account_management_upload_file():
 def load_file():
     filename = request.args.get('filename')
     file = open(os.path.join(app.config['UPLOAD_FOLDER'], filename), 'r')# r ở đây là read đọc file, appconfig là địa chỉ của file đã khai báo ở trên file __init__
-    data = csv.reader(file)
-    for username, password, email, phone_number, grant_permission in data:
-        user = User.query.filter_by(username=username)
-        if user.count() == 0:
-            created_at = datetime.datetime.now()
-            if grant_permission == 'True':
-                grant_permission = True
-            else:
-                grant_permission = False
-            user = User(username=username, password=password, email=email,
-                        phone_number=phone_number, grant_permission=grant_permission, created_at=created_at)
-            db.session.add(user)
-            db.session.commit()
+    data = csv.reader(file)# lấy dữ liệu từ file vs csv
+    for username, password, email, phone_number, grant_permission in data: # chạy từng dòng trong file với tên biến ứng với cột trong file
+        created_at = datetime.datetime.now()
+        if grant_permission == 'True':
+            grant_permission = True
         else:
-            flash('User {} already exists'.format(username))
-            return redirect(url_for('admin_account_management'))
+            grant_permission = False
+        user = User(username=username, password=password, email=email,
+                    phone_number=phone_number, grant_permission=grant_permission, created_at=created_at)
+        db.session.add(user)
+        db.session.commit()
     return render_template("pages/admin/account_management.html", success="Add account successfully")
 
 

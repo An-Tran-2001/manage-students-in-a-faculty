@@ -31,7 +31,7 @@ Student Management
       </form>
     </div>
   </div>
-  <p>{{error}}</p>
+  <p style="text-align:center">{{error}}</p>
   {% if scores %}
     <div class="information">
       <table>
@@ -60,7 +60,7 @@ Student Management
           <th>{{student.student_study_time}}</th>
         </tr>
       </table>
-      <p>-----------------------------></p>
+      <p>--------------------></p>
       <table>
         <tr>
           <th>Class_code:</th>
@@ -81,8 +81,9 @@ Student Management
       </table>
     </div>
     <div class="score">
-      {% for semester in scores.keys() %}
-      <h1>Semester {{semester}}</h1>
+      <div class="box_score">
+        {% for semester in scores.keys() %}
+      <h1 class="name_semester">Semester {{semester}}</h1>
       <table>
           <tr>
               <th>Student Code</th>
@@ -104,6 +105,7 @@ Student Management
           {% endfor %}
       </table>
       {% endfor %}
+      </div>
     </div>
     
   {% endif %}

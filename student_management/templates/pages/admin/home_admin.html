@@ -4,41 +4,48 @@
 Student Management System
 {% endblock %}
 
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/admin/home_admin.css') }}">
+{% endblock %}
+
 {% block content %}
-<p>{{success}}</p>
-<h1>Hello: {{user.username}}</h1>
-<table>
-    <tr>
-        <th></th>
-        <th>Information</th>
-    </tr>
-    <tr>
-        <td>Name</td>
-        <td>{{user.username}}</td>
-    </tr>
-    <tr>
-        <td>Email</td>
-        <td>{{user.email}}</td>
-    </tr>
-    <tr>
-        <td>Phone</td>
-        <td>{{user.phone_number}}</td>
-    </tr>
-    <tr>
-        <td>created_at</td>
-        <td>{{user.created_at}}</td>
-    </tr>
-    <tr>
-        <td>update_at</td>
-        <td>{{user.updated_at}}</td>
-    </tr>
-</table>
-<tabke>
-    <tr>
-        <th><a href="{{url_for('admin_edit_profile', user_id=user.id)}}">Edit Profile</a></th>
-        <th><a href="{{url_for('admin_change_password', user_id=user.id)}}">Change Password</a></th>
-        <th><a href="{{url_for('admin_logout')}}">Logout</a></th>
-    </tr>
+<div class="container">
+    <p>{{success}}</p>
+    <h1>Hello: {{user.username}}</h1>
+    <div class="box_admin_inf">
+        <table>
+            <tr>
+                <th colspan="2" style="text-align: center">Information</th>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>{{user.username}}</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>{{user.email}}</td>
+            </tr>
+            <tr>
+                <td>Phone</td>
+                <td>{{user.phone_number}}</td>
+            </tr>
+            <tr>
+                <td>created_at</td>
+                <td>{{user.created_at}}</td>
+            </tr>
+            <tr>
+                <td>update_at</td>
+                <td>{{user.updated_at}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <table>
+        <tr>
+            <th><a href="{{url_for('admin_edit_profile', user_id=user.id)}}">Edit Profile</a></th>
+            <th><a href="{{url_for('admin_change_password', user_id=user.id)}}">Change Password</a></th>
+            <th><a href="{{url_for('admin_logout')}}">Logout</a></th>
+        </tr>
     </table>
     <div class="admin_skill_box">
         <a href="{{url_for('admin_account_management')}}" class="button"> account management</a>
@@ -48,5 +55,7 @@ Student Management System
         <a href="{{url_for('admin_semester_management')}}" class="button"> semester management</a>
         <a href="{{url_for('admin_score_of_student_management')}}" class="button">score of student management</a>
     </div>
+</div>
+
 
     {% endblock %}
